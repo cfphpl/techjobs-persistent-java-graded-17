@@ -1,6 +1,5 @@
 package org.launchcode.techjobs.persistent.controllers;
 
-import jakarta.validation.constraints.NotNull;
 import org.launchcode.techjobs.persistent.models.Job;
 import org.launchcode.techjobs.persistent.models.data.EmployerRepository;
 import org.launchcode.techjobs.persistent.models.data.JobRepository;
@@ -24,8 +23,10 @@ public class ListController {
 
     @Autowired
     private JobRepository jobRepository;
+
     @Autowired
     private EmployerRepository employerRepository;
+
     @Autowired
     private SkillRepository skillRepository;
 
@@ -41,8 +42,11 @@ public class ListController {
 
     @RequestMapping("")
     public String list(Model model) {
-        model.addAttribute("employers", employerRepository.findAll());
-        model.addAttribute("skills",skillRepository.findAll());
+
+        model.addAttribute("employers", employerRepository.findAll()); // lists all employers
+
+        model.addAttribute("skills", skillRepository.findAll()); // lists all skills
+
         return "list";
     }
 

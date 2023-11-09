@@ -1,9 +1,9 @@
 package org.launchcode.techjobs.persistent.models;
 
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,10 +13,9 @@ public class Job extends AbstractEntity {
 
     @ManyToOne
     private Employer employer;
-    @ManyToMany
-    @NotNull(message = "Must select at least one skill")
-    private List<Skill> skills = new ArrayList<>();
 
+    @ManyToMany
+    private List<Skill> skills; // = new ArrayList<>();
 
     public Job() {
     }
@@ -29,8 +28,6 @@ public class Job extends AbstractEntity {
     }
 
     // Getters and setters.
-
-
 
     public Employer getEmployer() {
         return employer;

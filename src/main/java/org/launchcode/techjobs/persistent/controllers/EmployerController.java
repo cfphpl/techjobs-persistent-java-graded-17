@@ -9,31 +9,41 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("employers")
+@RequestMapping("employers/") // Had to add "/" so the redirect in processAddEmployerForm would work correctly. However, with most web pages, it doesn't matter whether you append a "/" to the end of the URL or not. I want to figure out how to make that work here.
+
 public class EmployerController {
 
     @Autowired
     private EmployerRepository employerRepository;
 
+    @GetMapping("/")
+    public String index(Model model) {
+
+        model.addAttribute("title", "All Employers");
+        model.addAttribute("employers", employerRepository.findAll());
+
+        return "employers/index";
+    }
+
     @GetMapping("add")
     public String displayAddEmployerForm(Model model) {
+
         model.addAttribute(new Employer());
+
         return "employers/add";
     }
 
     @PostMapping("add")
-    public String processAddEmployerForm(@ModelAttribute @Valid Employer newEmployer,
-                                         Errors errors, Model model) {
+    public String processAddEmployerForm(@ModelAttribute @Valid Employer newEmployer, Errors errors, Model model) {
 
         if (errors.hasErrors()) {
-            model.addAttribute("employer", new Employer());
             return "employers/add";
         }
-        employerRepository.save(newEmployer);
+
+        employerRepository.save(newEmployer); // using the variable to send the input to the database via the data layer
 
         return "redirect:";
     }
@@ -50,14 +60,6 @@ public class EmployerController {
             return "redirect:../";
         }
 
-    }
-
-    @GetMapping("/")
-    public String index(Model model) {
-        List employer = (List<Employer>) employerRepository.findAll();
-        model.addAttribute("title", "All Employers");
-        model.addAttribute("employers", employer);
-        return "employers/index";
     }
 
 }
