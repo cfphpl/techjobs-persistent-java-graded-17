@@ -5,7 +5,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+
 import java.util.Objects;
 
 @MappedSuperclass
@@ -15,21 +17,11 @@ public abstract class AbstractEntity {
     @GeneratedValue
     private int id;
 
-    @NotBlank(message = "Name is required")
-    @Size(max = 255, message = "Name must be less than 255 characters")
+    @NotBlank(message="Name cannot be blank")
+    @Size(max = 60, message = "Name cannot be more than 60 characters")
     private String name;
 
-    // Constructors
-
-    public AbstractEntity() {
-        // Default constructor
-    }
-
-    public AbstractEntity(String name) {
-        this.name = name;
-    }
-
-    // Getters and setters
+    public AbstractEntity () {}
 
     public int getId() {
         return id;
@@ -43,7 +35,10 @@ public abstract class AbstractEntity {
         this.name = name;
     }
 
-    // Other methods
+    @Override
+    public String toString() {
+        return name;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -57,4 +52,5 @@ public abstract class AbstractEntity {
     public int hashCode() {
         return Objects.hash(id);
     }
+
 }
