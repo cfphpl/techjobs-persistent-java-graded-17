@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("skills/") // Had to add "/" so the redirect in processAddEmployerForm would work correctly. However, with most web pages, it doesn't matter whether you append a "/" to the end of the URL or not. I want to figure out how to make that work here.
+@RequestMapping("skills/") // Had to add "/" so the redirect in processAddEmployerForm would work correctly.
 
 public class SkillController {
 

@@ -5,6 +5,7 @@ import org.launchcode.techjobs.persistent.models.Job;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+// create read update delete
 @Repository
 @Transactional
 public interface JobRepository extends CrudRepository<Job, Integer> {
