@@ -32,6 +32,7 @@ public class HomeController {
     @Autowired
     private JobRepository jobRepository;
 
+    //root
     @RequestMapping("/")
     public String index(Model model) {
 
@@ -41,6 +42,7 @@ public class HomeController {
         return "index";
     }
 
+    //add new job code
     @GetMapping("add")
     public String displayAddJobForm(Model model) {
 
@@ -52,6 +54,7 @@ public class HomeController {
         return "add";
     }
 
+    // makes sure new job good. sets to new job object and returns to /
     @PostMapping("add")
     public String processAddJobForm(@ModelAttribute @Valid Job newJob, Errors errors, Model model, @RequestParam int employerId, @RequestParam List<Integer> skills) {
 
@@ -77,7 +80,7 @@ public class HomeController {
 
         return "redirect:";
     }
-
+    //ret job by id and returns
     @GetMapping("view/{jobId}")
     public String displayViewJob(Model model, @PathVariable int jobId) {
 

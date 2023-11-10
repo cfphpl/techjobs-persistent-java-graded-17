@@ -18,7 +18,7 @@ public class EmployerController {
 
     @Autowired
     private EmployerRepository employerRepository;
-
+// HTTP get requests /
     @GetMapping("/")
     public String index(Model model) {
 
@@ -27,7 +27,7 @@ public class EmployerController {
 
         return "employers/index";
     }
-
+ // HTTP get request add
     @GetMapping("add")
     public String displayAddEmployerForm(Model model) {
 
@@ -47,7 +47,7 @@ public class EmployerController {
 
         return "redirect:";
     }
-
+// get requests for view/employerid
     @GetMapping("view/{employerId}")
     public String displayViewEmployer(Model model, @PathVariable int employerId) {
 
